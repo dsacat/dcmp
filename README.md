@@ -12,10 +12,6 @@ This project uses the following libraries and their dependencies, as well as the
 * `protobuf` ([BSD 3-Clause License](https://github.com/protocolbuffers/protobuf/blob/main/LICENSE ))
 * `keras' (used as part of TF) ([MIT License](https://github.com/keras-team/keras/blob/master/LICENSE ))
 
-* **`keras`** - [MIT License](https://github.com/keras-team/keras/blob/master/LICENSE )
-* Dependencies:
-* `tensorflow' (Keras dependency) ([Apache License 2.0](https://github.com/tensorflow/tensorflow/blob/master/LICENSE ))
-        *   `numpy` ([BSD 3-Clause License](https://github.com/numpy/numpy/blob/main/LICENSE.txt))
 
 * **`math`** - Python Standard Library (see [Python Software Foundation License](https://docs.python.org/3/license.html ))
 * Dependencies: No (part of the standard library)
