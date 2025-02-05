@@ -27,4 +27,3 @@ def fis(l, from_system=10, in_system=2, s=None, alf="0123456789ABCDEF"):
   if type(from_system) != int:
     if len(from_system) != len(l):
       raise ValueError("the length of the input data of the from_system variable must be equal to the length of the input data of the l variable.")
-  if type(l)
