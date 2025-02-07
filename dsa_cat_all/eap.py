@@ -1,6 +1,6 @@
-def fis(l, from_system=10, in_system=2, s=None, alf="0123456789ABCDEF"):
-  if type(alf) != list or alf != str:
-    raise ValueError("The alf input data must be of the string type.")
+def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None):
+  if type(alf) != list and type(alf) != str:
+    raise ValueError("The alf input data must be a string or a list.")
   elif type(alf) == str:
     alf = list(alf)
   if type(s) != str and s != None:
@@ -20,7 +20,7 @@ def fis(l, from_system=10, in_system=2, s=None, alf="0123456789ABCDEF"):
       if type(i) != int:
         raise ValueError("The input data type of the variable in_system must be a list with integers or an integer.")
   if type(from_system) == list:
-    for i in from_list:
+    for i in from_system:
       if type(i) != int:
         raise ValueError("The input data type of the variable from_system must be a list with integers or an integer.")
   if type(in_system) != int:
@@ -35,16 +35,36 @@ def fis(l, from_system=10, in_system=2, s=None, alf="0123456789ABCDEF"):
     l = [str(l)]
   if type(l) == str:
     l = [l]
-  if type(in_system) != int:
+  if type(in_system) == int:
     in_system = [in_system]*len(l)
-  if type(from_system) != int:
-    in_system = [from_system]*len(l)
+  if type(from_system) == int:
+    from_system = [from_system]*len(l)
   l2 = []
-  for i in l:
+  for i, i4 in zip(l, from_system):
     g = 0
-    for i2, i3, i4 in zip(reversed(i), len(i), from_system):
+    for i2, i3 in zip(list(reversed(i)), range(len(i))):
       try:
-        g+=i2*(i4**i3):
+        g+=alf.index(i2)*(i4**i3)
       except:
         raise ValueError("The item in the l list is not in the alf list.")
-  return g
+    l2+=[g]
+  l = [""]*len(l2)
+  for i, i2, i3 in zip(l2, in_system, range(len(l2))):
+    m = i
+    while m // i2 != 0:
+      try:
+        l[i3] = alf[m % i2] + l[i3]
+      except:
+        raise ValueError("The item in the l list is not in the alf list.")
+      m = m // i2
+    try:
+      l[i3] = alf[m % i2] + l[i3]
+    except:
+      raise ValueError("The item in the l list is not in the alf list.")
+  if s == None:
+    return l
+  else:
+    if type(s) == str:
+      return s.join(l)
+    else:
+      raise ValueError("The s input data must be a string.")
