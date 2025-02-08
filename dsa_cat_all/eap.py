@@ -1,4 +1,4 @@
-def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None):
+def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None, g=False):
   if type(alf) != list and type(alf) != str:
     raise ValueError("The alf input data must be a string or a list.")
   elif type(alf) == str:
@@ -48,19 +48,34 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None):
       except:
         raise ValueError("The item in the l list is not in the alf list.")
     l2+=[g]
-  l = [""]*len(l2)
-  for i, i2, i3 in zip(l2, in_system, range(len(l2))):
-    m = i
-    while m // i2 != 0:
+  if g == False:
+    l = [""]*len(l2)
+    for i, i2, i3 in zip(l2, in_system, range(len(l2))):
+      m = i
+      while m // i2 != 0:
+        try:
+          l[i3] = alf[m % i2] + l[i3]
+        except:
+          raise ValueError("The item in the l list is not in the alf list.")
+        m = m // i2
       try:
         l[i3] = alf[m % i2] + l[i3]
       except:
         raise ValueError("The item in the l list is not in the alf list.")
-      m = m // i2
-    try:
-      l[i3] = alf[m % i2] + l[i3]
-    except:
-      raise ValueError("The item in the l list is not in the alf list.")
+  else:
+    l = []*len(l2)
+    for i, i2, i3 in zip(l2, in_system, range(len(l2))):
+      m = i
+      while m // i2 != 0:
+        try:
+          l[i3] = [alf[m % i2]] + l[i3]
+        except:
+          raise ValueError("The item in the l list is not in the alf list.")
+        m = m // i2
+      try:
+        l[i3] = [alf[m % i2]] + l[i3]
+      except:
+        raise ValueError("The item in the l list is not in the alf list.")
   if s == None:
     return l
   else:
