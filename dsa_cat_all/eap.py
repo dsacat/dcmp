@@ -1,4 +1,4 @@
-def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None, g=False):
+def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None, k=False):
   if type(alf) != list and type(alf) != str:
     raise ValueError("The alf input data must be a string or a list.")
   elif type(alf) == str:
@@ -48,7 +48,7 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", s=None, g=False)
       except:
         raise ValueError("The item in the l list is not in the alf list.")
     l2+=[g]
-  if g == False:
+  if k == False:
     l = [""]*len(l2)
     for i, i2, i3 in zip(l2, in_system, range(len(l2))):
       m = i
