@@ -1,4 +1,4 @@
-def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=None, k=False):
+def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=False):
   if type(alf) != list and type(alf) != str:
     raise ValueError("The alf input data must be a string or a list.")
   if type(alf) == str:
@@ -9,8 +9,8 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Non
     alf = list(alf2)
   if alf2 == None:
     alf2 = alf
-  if type(s) != str and s != None:
-    raise ValueError("The s input data must be of the string or None type.")
+  if type(s) != str and s != False and s != True:
+    raise ValueError("The s input data must be of the string or None or True type.")
   if type(l) != int and type(l) != list and type(l) != str:
     raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
   if type(in_system) != int and type(in_system) != list:
@@ -74,7 +74,7 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Non
       except:
         raise ValueError("The item in the l list is not in the alf list.")
     l2+=[g]
-  if k == False:
+  if s != True:
     l = [""]*len(l2)
     for i, i2, i3 in zip(l2, in_system, range(len(l2))):
       m = i
@@ -102,7 +102,7 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Non
         l[i3] = [alf[m % i2]] + l[i3]
       except:
         raise ValueError("The item in the l list is not in the alf list.")
-  if s == None:
+  if type(s) != str:
     return l
   else:
     if type(s) == str:
