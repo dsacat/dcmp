@@ -3,6 +3,8 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
     raise ValueError("The alf input data must be a string or a list.")
   if type(alf) == str:
     alf = list(alf)
+  if type(alf2) == str:
+    alf2 = list(alf2)
   if type(alf2) != list and type(alf2) != str and alf2 != None:
     raise ValueError("The alf input data must be a string or a list or None type.")
   if type(alf2) == str:
@@ -45,10 +47,11 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
         raise ValueError("The input data type of the variable from_system must be a list with integers or an integer.")
   if type(in_system) != int:
     if len(in_system) != len(l):
-      raise ValueError("the length of the input data of the in_system variable must be equal to the length of the input data of the l variable.")
+      raise ValueError("The length of the input data of the in_system variable must be equal to the length of the input data of the l variable.")
   if type(from_system) != int:
     if len(from_system) != len(l):
-      raise ValueError("the length of the input data of the from_system variable must be equal to the length of the input data of the l variable.")
+      raise ValueError("The length of the input data of the from_system variable must be equal to the length of the input data of the l variable.")
+
   if type(l) == list:
     if p == False:
       l = list(map(str, l))
@@ -65,12 +68,26 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
     in_system = [in_system]*len(l)
   if type(from_system) == int:
     from_system = [from_system]*len(l)
+  for i in from_system:
+    if i < 2:
+      raise ValueError("The number in the from_system must be greater than 1.")
+    if i > len(alf):
+      raise ValueError("The number in from_system must be less than the length of the length alf.")
+  for i in in_system:
+    if i < 2:
+      raise ValueError("The number in the in_system must be greater than 1.")
+    if i > len(alf2):
+      raise ValueError("The number in in_system must be less than the length of the length alf.")
   l2 = []
   for i, i4 in zip(l, from_system):
     g = 0
     for i2, i3 in zip(list(reversed(i)), range(len(i))):
       try:
-        g+=alf2.index(i2)*(i4**i3)
+        if alf.index(i2) < i4:
+          g+=alf.index(i2)*(i4**i3)
+        else:
+          raise ValueError("The number in from_system is incorrect, because there are more numbers in the l list than the number in from_system.")
+          exit()
       except:
         raise ValueError("The item in the l list is not in the alf list.")
     l2+=[g]
@@ -80,12 +97,12 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
       m = i
       while m // i2 != 0:
         try:
-          l[i3] = alf[m % i2] + l[i3]
+          l[i3] = alf2[m % i2] + l[i3]
         except:
           raise ValueError("The item in the l list is not in the alf list.")
         m = m // i2
       try:
-        l[i3] = alf[m % i2] + l[i3]
+        l[i3] = alf2[m % i2] + l[i3]
       except:
         raise ValueError("The item in the l list is not in the alf list.")
   else:
@@ -94,12 +111,12 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
       m = i
       while m // i2 != 0:
         try:
-          l[i3] = [alf[m % i2]] + l[i3]
+          l[i3] = [alf2[m % i2]] + l[i3]
         except:
           raise ValueError("The item in the l list is not in the alf list.")
         m = m // i2
       try:
-        l[i3] = [alf[m % i2]] + l[i3]
+        l[i3] = [alf2[m % i2]] + l[i3]
       except:
         raise ValueError("The item in the l list is not in the alf list.")
   if type(s) != str:
