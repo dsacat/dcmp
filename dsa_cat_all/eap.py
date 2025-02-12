@@ -14,7 +14,7 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
   if type(s) != str and s != False and s != True:
     raise ValueError("The s input data must be of the string or None or True type.")
   if type(l) != int and type(l) != list and type(l) != str:
-    raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
+    raise ValueError("The input data type of the variable l must be a list with integers or a list with list with integers or an integer.")
   if type(in_system) != int and type(in_system) != list:
     raise ValueError("The input data type of the variable in_system must be a list with integers or an integer.")
   if type(from_system) != int and type(from_system) != list:
@@ -23,20 +23,20 @@ def fis(l, from_system=10, in_system=2, alf="0123456789ABCDEF", alf2=None, s=Fal
   if type(l) == list:
     for i in l:
       if type(i) != str and type(i) != int and type(i) != list:
-        raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
+        raise ValueError("The input data type of the variable l must be a number or a string, or a list with integers, a list with strings, or a list with a list with integers, or a list with a list with strings.")
       if type(i)==list:
         p=True
         for i2 in i:
           if type(i2) != int and type(i2) != str:
-              raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
+              raise ValueError("The input data type of the variable l must be a number or a string, or a list with integers, a list with strings, or a list with a list with integers, or a list with a list with strings.")
     if p == True:
       for i in l:
         if type(i) != list:
-          raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
+          raise ValueError("The input data type of the variable l must be a number or a string, or a list with integers, a list with strings, or a list with a list with integers, or a list with a list with strings.")
     if p == False:
       for i in l:
         if type(i) != str and type(i) != int:
-          raise ValueError("The input data type of the variable l must be a list with integers or a list with list ith integers or an integer.")
+          raise ValueError("The input data type of the variable l must be a number or a string, or a list with integers, a list with strings, or a list with a list with integers, or a list with a list with strings.")
   if type(in_system) == list:
     for i in in_system:
       if type(i) != int:
